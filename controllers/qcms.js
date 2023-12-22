@@ -1,15 +1,12 @@
-const {qcms, addQcm, addQuestion, addReponse} = require('../models/inmemory');
+// controllers/qcms.js
+const { qcms, addQcm, addQuestion} = require('../models/inmemory');
 
 const displayQcms = (req, res) => {
-    for (let qcm of qcms) {
-        console.log(`${qcm.nbpoints}: ${typeof(qcm.nbpoints)}`);
-    }
     res.render('qcms', {qcms: qcms});
 };
 
 const displayQcmDetailed = (req, res) => {
     const id = Number(req.params.qcmid);
-    console.log(id);
     const qcm = qcms.find((element) => element.id === id);
     res.render('qcm', {qcm});
 }
@@ -23,25 +20,35 @@ const displayFormQcm = (req, res) => {
 };
 
 const createNewForm = (req, res) => {
-    console.log(req.body);
-    addQcm({
-        name: req.body.name,
-        subject: req.body.subject,
-        nbpoints: req.body.nbpoints
-    });
 
-    addQuestion({
-        title: req.body.title,
-        reponse: req.body.reponse
-        });
-        
-    addReponse({
-        id_qestion: req.body.id_qestion,
-        title: req.body.title,
-        bonne_reponse: req.body.bonne_reponse
-        });
+  let questions=[]
 
-    res.redirect('/qcms');
+  for (let i = 1; i <= 4; i++) {
+    let reponses=[]
+    let bonne_reponse
+    for (let j = 1; j <= 4; j++) {  
+      reponses.push(req.body[`option${j}_q${i}`])
+      req.body[`checkbox${j}_q${i}`] === 'on' ? bonne_reponse=j-1:''
+    }
+    const questionData = {
+      id: i,
+      title: req.body[`question${i}`],
+      reponses: reponses,
+      bonne_reponse: bonne_reponse
+    };
+    questions.push(addQuestion(questionData))
+  }
+  
+  const qcmData = {
+    name: req.body.name,
+    subject: req.body.subject,
+    nbpoints: req.body.nbpoints,
+    questions: questions,
+  };
+  addQcm(qcmData);
+
+  res.redirect('/qcms');
 };
 
 module.exports = {displayQcms, displayFormQcm, createNewForm, displayQcmJson, displayQcmDetailed};
+

@@ -2,12 +2,14 @@ class Question {
 
     #id;
     #title;
-    #reponse;
+    #reponses;
+    #bonne_reponse
 
     constructor(questionToCreate) {
         this.#id = questionToCreate.id;
         this.#title = questionToCreate.title;
-        this.#reponse = questionToCreate.reponse;
+        this.#reponses = questionToCreate.reponses;
+        this.#bonne_reponse = questionToCreate.bonne_reponse;
     }
 
     get id() {
@@ -16,11 +18,20 @@ class Question {
 
     get title() {
         return this.#title;
-    }6
-
-    get reponse() {
-        return this.#reponse;
     }
+
+    get reponses() {
+        return this.#reponses;
+    }
+
+    get bonne_reponse() {
+        return this.#bonne_reponse;
+    }
+
+    toJSON() {
+        return {id: this.#id, title: this.#title, reponses: this.#reponses, bonne_reponse: this.#bonne_reponse};
+    }
+
 }
 
 module.exports = Question;

@@ -2,11 +2,10 @@
 
 <p>Mes QCMS disponibles</p>
 <ul>
-    <% for (let qcm of qcms) { %> <!--commencer le parcours de la liste qcms -->
-    <li><%= qcm.name %> (<%= qcm.subject %>) : <%= qcm.nbpoints %> points</li> <!-- Introduction Vanilla JS (Javascript): 20 points -->
+    <% for (let qcm of qcms) { %> 
+    <li><%= qcm.name %> (<%= qcm.subject %>) : <%= qcm.nbpoints %> points</li> 
 
-     <!-- afficher l'élément de la liste et le nb de points du Qcm-->
-    <% } %> <!-- penser à fermer le corps de la boucle -->
+    <% } %>
 </ul>
 
 <%- include('footer') -%>

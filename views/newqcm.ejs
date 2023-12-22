@@ -1,119 +1,52 @@
-<%- include('header') -%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Mes QCMs</title>
+  </head>
+  <body>
+    <h1>QCM</h1>
 
-<form action="/qcms/new" method="POST">
-    <div>
+    <form action="/qcms/new" method="POST">
+      <div>
         <label for="name">Nom</label>
-        <input type="text" id="name" name="name">
-    </div>
-    <div>
+        <input type="text" id="name" name="name" />
+      </div>
+      <div>
         <label for="subject">Sujet</label>
-        <input type="text" id="subject" name="subject">
-    </div>
-    <div>
+        <input type="text" id="subject" name="subject" />
+      </div>
+      <div>
         <label for="nbpoints">Nb points</label>
-        <input type="number" id="nbpoints" name="nbpoints">
-    </div>
+        <input type="number" id="nbpoints" name="nbpoints" />
+      </div>
 
-    <div>
-        <label for="question">Question N°1</label>
-        <input type="text" id="question" name="question">
-    </div>
-    <div>
-        <label for="option1">Option 1</label>
-        <input type="text" id="option1" name="option1">
-        <input type="checkbox" id="checkbox1" name="checkbox1">
-    </div>
-    <div>
-        <label for="option2">Option 2</label>
-        <input type="text" id="option2" name="option2">
-        <input type="checkbox" id="checkbox2" name="checkbox2">
-    </div>
-    <div>
-        <label for="option3">Option 3</label>
-        <input type="text" id="option3" name="option3">
-        <input type="checkbox" id="checkbox3" name="checkbox3">
-    </div>
+      <% for(let i=1; i<=4; i++) { %>
+      <div>
+        <label for="question<%= i %>">Question N°<%= i %></label>
+        <input type="text" id="question<%= i %>" name="question<%= i %>" />
 
-    <div>
-        <label for="option3">Option 4</label>
-        <input type="text" id="option4" name="option4">
-        <input type="checkbox" id="checkbox4" name="checkbox4">
-    </div>
+        <% for(let j=1; j<=4; j++) { %>
+        <div>
+          <label for="option<%= j %>_q<%= i %>">Option <%= j %></label>
+          <input
+            type="text"
+            id="option<%= j %>_q<%= i %>"
+            name="option<%= j %>_q<%= i %>"
+          />
+          <input
+            type="checkbox"
+            id="checkbox<%= j %>_q<%= i %>"
+            name="checkbox<%= j %>_q<%= i %>"
+          />
+        </div>
+        <% } %>
+      </div>
+      <% } %>
 
-    <div>
-        <label for="question">Question N°2</label>
-        <input type="text" id="question" name="question">
-    </div>
-    <div>
-        <label for="option1">Option 1</label>
-        <input type="text" id="option1" name="option1">
-        <input type="checkbox" id="checkbox5" name="checkbox5">
-    </div>
-    <div>
-        <label for="option2">Option 2</label>
-        <input type="text" id="option2" name="option2">
-        <input type="checkbox" id="checkbox6" name="checkbox6">
-    </div>
-    <div>
-        <label for="option3">Option 3</label>
-        <input type="text" id="option3" name="option3">
-        <input type="checkbox" id="checkbox7" name="checkbox7">
-    </div>
-    <div>
-        <label for="option3">Option 4</label>
-        <input type="text" id="option4" name="option4">
-        <input type="checkbox" id="checkbox8" name="checkbox8">
-    </div>
-    <div>
-        <label for="question">Question N°3</label>
-        <input type="text" id="question" name="question">
-    </div>
-    <div>
-        <label for="option1">Option 1</label>
-        <input type="text" id="option1" name="option1">
-        <input type="checkbox" id="checkbox9" name="checkbox9">
-    </div>
-    <div>
-        <label for="option2">Option 2</label>
-        <input type="text" id="option2" name="option2">
-        <input type="checkbox" id="checkbox10" name="checkbox10">
-    </div>
-    <div>
-        <label for="option3">Option 3</label>
-        <input type="text" id="option3" name="option3">
-        <input type="checkbox" id="checkbox11" name="checkbox11">
-    </div>
-    <div>
-        <label for="option3">Option 4</label>
-        <input type="text" id="option4" name="option4">
-        <input type="checkbox" id="checkbox12" name="checkbox12">
-    </div>
-    <div>
-        <label for="question">Question N°4</label>
-        <input type="text" id="question" name="question">
-    </div>
-    <div>
-        <label for="option1">Option 1</label>
-        <input type="text" id="option1" name="option1">
-        <input type="checkbox" id="checkbox13" name="checkbox13">
-    </div>
-    <div>
-        <label for="option2">Option 2</label>
-        <input type="text" id="option2" name="option2">
-        <input type="checkbox" id="checkbox14" name="checkbox14">
-    </div>
-    <div>
-        <label for="option3">Option 3</label>
-        <input type="text" id="option3" name="option3">
-        <input type="checkbox" id="checkbox15" name="checkbox15">
-    </div>
-    <div>
-        <label for="option3">Option 4</label>
-        <input type="text" id="option4" name="option4">
-        <input type="checkbox" id="checkbox16" name="checkbox16">
-    </div>
-    <input type="submit" value="Create">
-</form>
-<%- include('footer') -%>
+      <input type="submit" value="Create" />
+    </form>
 
-
+    <%- include('footer') -%>
+  </body>
+</html>
